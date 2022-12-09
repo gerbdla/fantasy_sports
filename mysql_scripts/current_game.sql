@@ -1,0 +1,1 @@
+SELECT  `Player Name`, Salary , `Opp Pace`, `Opp DEff`, `Opp DvP`,`Proj FP`  from basketball.current_game  where `Proj FP` > 15 order by Salary ;

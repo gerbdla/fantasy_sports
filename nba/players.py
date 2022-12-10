@@ -47,65 +47,32 @@ def get_team():
     return all_players
 
 def gpp():
-    act_gt_proj_group = []
-    final_player_group =[]
-    act_gt_proj_group = get_team()
-    
-    #final_player_group.append(get_team('PG',high_spread,low_spread,min_player_points,ou,pace,ceiling,gpp))
-    #final_player_group.append(get_team('SG',high_spread,low_spread,min_player_points,ou,pace,ceiling,gpp))
-    #final_player_group.append(get_team('SF',high_spread,low_spread,min_player_points,ou,pace,ceiling,gpp))
-    #final_player_group.append(get_team('PF',high_spread,low_spread,min_player_points,ou,pace,ceiling,gpp))
-    #final_player_group.append(get_team('C',high_spread,low_spread,min_player_points,ou,pace,ceiling,gpp))
+    final_player_group = get_team()
      
     workbook = xlsxwriter.Workbook('players_for_fanduel.xlsx')
-    # high_proj_points = workbook.add_format()
-    # high_proj_points.set_font_color('red')
-    # high_proj_points.set_bold()
-    # high_proj_points.set_bg_color('yellow')
-    # high_proj_points.set_font_size(14)
-
-    # highlight = workbook.add_format()
-    # highlight.set_font_color('pink')
-    # highlight.set_bold()
-    # highlight.set_bg_color('yellow')
-    # highlight.set_font_size(14)
-
+    
     # starting = workbook.add_format()
     # starting.set_font_color('green')
     # starting.set_bold()
     # starting.set_bg_color('yellow')
     # starting.set_font_size(14)
 
-    # high_pv = workbook.add_format()
-    # high_pv.set_font_color('purple')
-    # high_pv.set_bold()
-    # high_pv.set_bg_color('yellow')
-    # high_pv.set_font_size(14)
-
     worksheetPG = workbook.add_worksheet("ALL PLAYERS")
-    #worksheetPG = workbook.add_worksheet("PG")
-    #worksheetSG = workbook.add_worksheet("SG")
-    #worksheetSF = workbook.add_worksheet("PF")
-    #worksheetPF =  workbook.add_worksheet("SF")
-    #worksheetC = workbook.add_worksheet("C")
-    #worksheetALL = workbook.add_worksheet("All")
-    #worksheetSTATS = workbook.add_worksheet("STATS")
-    #worksheet_act_gt_proj = workbook.add_worksheet()
     
     # Set the column headers for spreadsheet
     col_count = 0
-    act_gt_proj_headers = ["Name","Opp","Pos","PS","USG", \
+    headers = ["Name","Opp","Pos","PS","USG", \
     "PER","OPP_PACE","OPP_DEFF","LS_FGA","L5_FGA","S_FGA", \
     "Likes","Salary","Team","Opp", "L2_Min","L5_min","Floor_FP","Ceil_FP", \
-    "Proj_Min","Proj_FP","Ceil_Floor"]    #('Nikola Jokic', '@POR', 'C', 114, '26', '31', 99, 111, 16, 15, 13, '', 11500, 'DEN', '@POR', 36, 32, 40.8, 61.0, 34.0, 53.5, 20.200000000000003)
+    "Proj_Min","Proj_FP","Ceil_Floor"]    
 
     # Creat the column headers
-    for name in act_gt_proj_headers:
+    for name in headers:
         worksheetPG.write(0, col_count, name)
         col_count = col_count + 1
     # Inser the data into excel spreadsheet
     row_count = 1
-    for field in get_team():
+    for field in final_player_group:
       col_count = 0      
       for column in field:
          worksheetPG.write(row_count, col_count  ,field[col_count])     
@@ -113,6 +80,7 @@ def gpp():
       row_count = row_count + 1
     
     workbook.close()
+    print("finished")
 
 if __name__ == '__main__':
     gpp()

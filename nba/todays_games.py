@@ -4,15 +4,16 @@ import csv
 from datetime import datetime
 import sys
 
+
 DB_HOST = 'localhost'
 DB_USER = 'root'
 DB_PASSWORD = ''
 DB_NAME = 'basketball'
 
-db = pymysql.connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME)
+
 
 def get_all_player_data():
-    db = pymysql.connect(DB_HOST,DB_USER,DB_PASSWORD,DB_NAME)
+    db = connection.Connection.connect()
     cursor = db.cursor()
     db.cursor()
     cursor.execute("SELECT * from players")

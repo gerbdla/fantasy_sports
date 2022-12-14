@@ -8,6 +8,7 @@ import requests
 import xlsxwriter
 import connection 
  
+
 def get_team():
     db = connection.Connection.connect()
     cursor = db.cursor()
@@ -34,6 +35,10 @@ def gpp():
     
 
     worksheetPG = workbook.add_worksheet("PG")
+    worksheetC = workbook.add_worksheet("C")
+    worksheetSG = workbook.add_worksheet("SG")
+    worksheetSG_PG = workbook.add_worksheet("SG-PG")
+    worksheetSG_SF = workbook.add_worksheet("SG-SF")
     
     # Set the column headers for spreadsheet
     col_count = 0
@@ -51,16 +56,16 @@ def gpp():
     row_count = 1
     # For each row in the dataset
     for row in final_player_group:
-        if row[4] > 7000:
+        print(row[3])
+    
+        if row[22] > 20 and row[23] > 4.1 and row[11] > 101 and row[4] >= 1 and row[8] > 115 and row[11] > 100 and row[12] > 110:
+            row_count = row_count + 1
             col_count = 0
             for column in row:
               print(col_count)
-              
               worksheetPG.write(row_count, col_count  ,row[col_count],less_than_4999)     
               col_count = col_count + 1   
-        row_count = row_count + 1
-
-
+               
     workbook.close()
     print("finished")
 
